@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{2F7106BC-F684-4911-B8BD-7578BA480543}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <StartupObject>configuracion.Module1</StartupObject>
+    <StartupObject>configuracion.co</StartupObject>
     <RootNamespace>configuracion</RootNamespace>
     <AssemblyName>configuracion</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -68,7 +68,9 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Module1.vb" />
+    <Compile Include="clases\acceso_datos.vb" />
+    <Compile Include="clases\configuracion.vb" />
+    <Compile Include="clases\metodos_datos.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
