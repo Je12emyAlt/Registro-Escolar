@@ -194,6 +194,7 @@ Public Class acceso_datos
 #End Region
 
 #Region "Info_cursos"
+#Region "buscar"
     Public Shared Function buscar_info_curso(id_curso As String) As DataTable
         Dim tabla As DataTable
         Dim sql_command As SqlCommand
@@ -217,7 +218,9 @@ Public Class acceso_datos
         tabla = metodos_datos.EjecutarBusqueda(sql_command)
         Return tabla
     End Function
+#End Region
 
+#Region "Agregar"
     Public Shared Function agregar_info_curso(id_curso As String, id_carrera As String, id_horario As String, nombre As String, id_profesor As String, descripcion As String,
                                               requisito As String, id_sede As String, costo As String, creditos As String) As Integer
         Dim i As Integer
@@ -250,7 +253,9 @@ Public Class acceso_datos
         i = metodos_datos.EjecutarComando(sql_command)
         Return i
     End Function
+#End Region
 
+#Region "Modificar"
     Public Shared Function modificar_info_curso(id_curso As String, id_carrera As String, id_horario As String, nombre As String, id_profesor As String, descripcion As String,
                                               requisito As String, id_sede As String, costo As String, creditos As String) As Integer
         Dim i As Integer
@@ -283,7 +288,9 @@ Public Class acceso_datos
         i = metodos_datos.EjecutarComando(sql_command)
         Return i
     End Function
+#End Region
 
+#Region "Borrar"
     Public Shared Function borrar_info_curso(id_curso As String) As Integer
         Dim i As Integer
         Dim sql_command As New SqlCommand
@@ -296,6 +303,7 @@ Public Class acceso_datos
         i = metodos_datos.EjecutarComando(sql_command)
         Return i
     End Function
+#End Region
 
 #End Region
 
