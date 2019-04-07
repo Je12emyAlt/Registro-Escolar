@@ -552,18 +552,194 @@ Public Class acceso_datos
     End Function
 #End Region
 
+#End Region
 
+#Region "info_profesores"
 
+#Region "Buscar"
+    Public Shared Function buscar_info_profesor(id_profesor As String) As DataTable
+        Dim tabla As DataTable
+        Dim sql_command As New SqlCommand
 
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "SELECT * FROM info_prefesor WHERE id_profesor = @id_profesor"
+        sql_command.Parameters.Add("@id_profesor", SqlDbType.NVarChar)
 
+        sql_command.Parameters(0).Value = id_profesor
 
+        tabla = metodos_datos.EjecutarBusqueda(sql_command)
+        Return tabla
+    End Function
 
+    Public Shared Function buscar_info_profesor_todo() As DataTable
+        Dim tabla As DataTable
+        Dim sql_command As New SqlCommand
 
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "SELECT * FROM info_prefesor"
 
-
-
+        tabla = metodos_datos.EjecutarBusqueda(sql_command)
+        Return tabla
+    End Function
 
 #End Region
+
+#Region "agregar"
+    Public Shared Function agregar_info_profesor(id_profesor As String, nombre As String, apellido As String, correo As String, telefono As String) As Integer
+        Dim i As Integer
+        Dim sql_command As New SqlCommand
+
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "INSERT INTO info_profesor VALUES(@id_profesor, @nombre, @apellido, @correo, @telefono)"
+        sql_command.Parameters.Add("@id_profesor", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@nombre", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@apellido", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@correo", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@telefono", SqlDbType.NVarChar)
+
+        sql_command.Parameters(0).Value = id_profesor
+        sql_command.Parameters(1).Value = nombre
+        sql_command.Parameters(2).Value = apellido
+        sql_command.Parameters(3).Value = correo
+        sql_command.Parameters(4).Value = telefono
+
+        i = metodos_datos.EjecutarComando(sql_command)
+        Return i
+    End Function
+#End Region
+
+#Region "modificar"
+    Public Shared Function modificar_info_profesor(id_profesor As String, nombre As String, apellido As String, correo As String, telefono As String) As Integer
+        Dim i As Integer
+        Dim sql_command As New SqlCommand
+
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "UPDATE info_profesor SET nombre = @nombre, apellido = @apellido, correo = @correo, telefono = @telefono WHERE id_profesor = @id_profesor"
+        sql_command.Parameters.Add("@id_profesor", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@nombre", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@apellido", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@correo", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@telefono", SqlDbType.NVarChar)
+
+        sql_command.Parameters(0).Value = id_profesor
+        sql_command.Parameters(1).Value = nombre
+        sql_command.Parameters(2).Value = apellido
+        sql_command.Parameters(3).Value = correo
+        sql_command.Parameters(4).Value = telefono
+
+        i = metodos_datos.EjecutarComando(sql_command)
+        Return i
+    End Function
+#End Region
+
+#Region "borrar"
+    Public Shared Function borrar_info_profesor(id_profesor As String) As String
+        Dim i As Integer
+        Dim sql_command As New SqlCommand
+
+        sql_command = metodos_datos.CrearComando()
+        sql_command.CommandText = "DELETE FROM info_profesor WHERE id_profesor = @id_profesor"
+        sql_command.Parameters.Add("@id_profesor", SqlDbType.NVarChar)
+
+        i = metodos_datos.EjecutarComando(sql_command)
+        Return i
+    End Function
+
+#End Region
+
+#End Region
+
+#Region "info_sede"
+
+#Region "Buscar"
+    Public Shared Function buscar_info_sede(id_sede As String) As DataTable
+        Dim tabla As DataTable
+        Dim sql_command As New SqlCommand
+
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "SELECT * FROM info_sede WHERE id_sede = @id_sede"
+        sql_command.Parameters.Add("@id_sede", SqlDbType.NVarChar)
+
+        sql_command.Parameters(0).Value = id_sede
+
+        tabla = metodos_datos.EjecutarBusqueda(sql_command)
+        Return tabla
+    End Function
+
+    Public Shared Function buscar_info_sede_todo() As DataTable
+        Dim tabla As DataTable
+        Dim sql_command As New SqlCommand
+
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "SELECT * FROM info_sede"
+
+        tabla = metodos_datos.EjecutarBusqueda(sql_command)
+        Return tabla
+    End Function
+
+#End Region
+
+#Region "agregar"
+    Public Shared Function agregar_info_sede(id_sede As String, nombre As String, descripcion As String, direccion As String) As Integer
+        Dim i As Integer
+        Dim sql_command As New SqlCommand
+
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "INSERT INTO info_sede VALUES(@id_sede, @nombre, @descripcion, @direccion)"
+        sql_command.Parameters.Add("@id_sede", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@nombre", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@descripcion", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@direccion", SqlDbType.NVarChar)
+
+        sql_command.Parameters(0).Value = id_sede
+        sql_command.Parameters(1).Value = nombre
+        sql_command.Parameters(2).Value = descripcion
+        sql_command.Parameters(3).Value = direccion
+
+        i = metodos_datos.EjecutarComando(sql_command)
+        Return i
+    End Function
+#End Region
+
+#Region "modificar"
+    Public Shared Function modificar_info_sede(id_sede As String, nombre As String, descripcion As String, direccion As String) As Integer
+        Dim i As Integer
+        Dim sql_command As New SqlCommand
+
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "UPDATE info_sede SET nombre = @nombre, descripcion =@descripcion, direccion = @direccion"
+        sql_command.Parameters.Add("@id_sede", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@nombre", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@descripcion", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@direccion", SqlDbType.NVarChar)
+
+        sql_command.Parameters(0).Value = id_sede
+        sql_command.Parameters(1).Value = nombre
+        sql_command.Parameters(2).Value = descripcion
+        sql_command.Parameters(3).Value = direccion
+
+        i = metodos_datos.EjecutarComando(sql_command)
+        Return i
+    End Function
+#End Region
+
+#Region "borrar"
+    Public Shared Function borrar_info_sede(id_sede As String) As String
+        Dim i As Integer
+        Dim sql_command As New SqlCommand
+
+        sql_command = metodos_datos.CrearComando()
+        sql_command.CommandText = "DELETE FROM info_sede WHERE id_sede = @id_sede"
+        sql_command.Parameters.Add("@id_sede", SqlDbType.NVarChar)
+
+        i = metodos_datos.EjecutarComando(sql_command)
+        Return i
+    End Function
+
+#End Region
+
+#End Region
+
 
 
 End Class
