@@ -194,7 +194,24 @@ Public Class acceso_datos
 #End Region
 
 #Region "Info_cursos"
+
 #Region "buscar"
+    Public Shared Function buscar_info_curso_carrera(id_curso As String, id_carrera As String) As DataTable
+        Dim tabla As DataTable
+        Dim sql_command As SqlCommand
+
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "EXEC GetCurso @id_curso, @id_carrera"
+        sql_command.Parameters.Add("@id_curso", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@id_carrera", SqlDbType.NVarChar)
+        sql_command.Parameters(0).Value = id_curso
+        sql_command.Parameters(1).Value = id_carrera
+
+        tabla = metodos_datos.EjecutarBusqueda(sql_command)
+        Return tabla
+
+    End Function
+
     Public Shared Function buscar_info_curso(id_curso As String) As DataTable
         Dim tabla As DataTable
         Dim sql_command As SqlCommand
@@ -262,7 +279,7 @@ Public Class acceso_datos
         Dim sql_command As New SqlCommand
 
         sql_command = metodos_datos.CrearComando
-        sql_command.CommandText = "UPDATE info_curso SET id_carrera = @id_carrera, id_horario = @id_horario, nombre = @nombre, id_profesor = @id_profesor, descripcion = @descripcion, requisito = @requisito, id_sede = @id_sede, costo = @costo, creditos = @creditos WHERE id_curso = @id_curso"
+        sql_command.CommandText = "UPDATE info_curso SET id_horario = @id_horario, nombre = @nombre, id_profesor = @id_profesor, descripcion = @descripcion, requisito = @requisito, id_sede = @id_sede, costo = @costo, creditos = @creditos WHERE id_curso = @id_curso AND id_carrera = @id_carrera"
         sql_command.Parameters.Add("@id_curso", SqlDbType.NVarChar)
         sql_command.Parameters.Add("@id_carrera", SqlDbType.NVarChar)
         sql_command.Parameters.Add("@id_horario", SqlDbType.NVarChar)
@@ -291,14 +308,16 @@ Public Class acceso_datos
 #End Region
 
 #Region "Borrar"
-    Public Shared Function borrar_info_curso(id_curso As String) As Integer
+    Public Shared Function borrar_info_curso(id_curso As String, id_carrera As String) As Integer
         Dim i As Integer
         Dim sql_command As New SqlCommand
 
         sql_command = metodos_datos.CrearComando
-        sql_command.CommandText = "DELETE FROM info_curso WHERE id_curso = @id_curso"
+        sql_command.CommandText = "DELETE FROM info_curso WHERE id_curso = @id_curso AND id_carrera = @id_carrera"
         sql_command.Parameters.Add("@id_curso", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@id_carrera", SqlDbType.NVarChar)
         sql_command.Parameters(0).Value = id_curso
+        sql_command.Parameters(1).Value = id_carrera
 
         i = metodos_datos.EjecutarComando(sql_command)
         Return i
@@ -306,5 +325,245 @@ Public Class acceso_datos
 #End Region
 
 #End Region
+
+#Region "Info_matricula"
+
+#Region "buscar"
+    '*******************************************************************************
+    Public Shared Function buscar_info_matricula_estudiante(id_matricula As String, id_cedula As String) As DataTable
+        Dim tabla As DataTable
+        Dim sql_command As New SqlCommand
+
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "EXEC GetMatriculaEstudiante @id_matricula,@id_cedula"
+        sql_command.Parameters.Add("@id_matricula", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@id_cedula", SqlDbType.NVarChar)
+
+        sql_command.Parameters(0).Value = id_matricula
+        sql_command.Parameters(1).Value = id_cedula
+
+        tabla = metodos_datos.EjecutarBusqueda(sql_command)
+        Return tabla
+    End Function
+
+
+    Public Shared Function buscar_info_matricula(id_matricula As String) As DataTable
+        Dim tabla As DataTable
+        Dim sql_command As New SqlCommand
+
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "EXEC GetMatricula @id_matricula"
+        sql_command.Parameters.Add("@id_matricula", SqlDbType.NVarChar)
+        sql_command.Parameters(0).Value = id_matricula
+
+        tabla = metodos_datos.EjecutarBusqueda(sql_command)
+        Return tabla
+    End Function
+
+    Public Shared Function buscar_info_matricula_todo() As DataTable
+        Dim tabla As DataTable
+        Dim sql_command As New SqlCommand
+
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "EXEC GetMatricula_todo"
+
+        tabla = metodos_datos.EjecutarBusqueda(sql_command)
+        Return tabla
+    End Function
+#End Region
+
+#Region "Agregar"
+    Public Shared Function agregar_info_matricula(id_matricula As String, id_cedula As String, id_curso As String, año As String, cuatrimestre As String)
+        Dim i As Integer
+        Dim sql_command As New SqlCommand
+
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "INSERT INTO info_matricula VALUES (@id_matricula, @id_cedula, @id_curso, @año, @cuatrimestre)"
+        sql_command.Parameters.Add("@id_matricula", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@id_cedula", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@id_curso", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@año", SqlDbType.Int)
+        sql_command.Parameters.Add("@cuatrimestre", SqlDbType.Int)
+
+        sql_command.Parameters(0).Value = id_matricula
+        sql_command.Parameters(1).Value = id_cedula
+        sql_command.Parameters(2).Value = id_curso
+        sql_command.Parameters(3).Value = año
+        sql_command.Parameters(4).Value = cuatrimestre
+
+        i = metodos_datos.EjecutarComando(sql_command)
+        Return i
+    End Function
+#End Region
+
+#Region "Modificar"
+    Public Shared Function modificar_info_matricula(id_matricula As String, id_cedula As String, id_curso As String, año As String, cuatrimestre As String) As Integer
+        Dim i As Integer
+        Dim sql_command As New SqlCommand
+
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "UPDATE info_matricula SET id_curso = @id_curso, año = @año, cuatrimestre = @cuatrimestre WHERE id_matricula = @id_matricula AND id_cedula = @id_cedula"
+        sql_command.Parameters.Add("@id_matricula", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@id_cedula", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@id_curso", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@año", SqlDbType.Int)
+        sql_command.Parameters.Add("@cuatrimestre", SqlDbType.Int)
+
+        sql_command.Parameters(0).Value = id_matricula
+        sql_command.Parameters(1).Value = id_cedula
+        sql_command.Parameters(2).Value = id_curso
+        sql_command.Parameters(3).Value = año
+        sql_command.Parameters(4).Value = cuatrimestre
+
+        i = metodos_datos.EjecutarComando(sql_command)
+        Return i
+    End Function
+#End Region
+
+#Region "borrar"
+    Public Shared Function borar_info_matricula(id_matricula As String, id_cedula As String) As Integer
+        Dim i As Integer
+        Dim sql_command As New SqlCommand
+
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "DELETE FROM info_matricula WHERE id_matricula = @id_matricula AND id_cedula = @id_cedula"
+        sql_command.Parameters.Add("@id_matricula", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@id_cedula", SqlDbType.NVarChar)
+
+        sql_command.Parameters(0).Value = id_matricula
+        sql_command.Parameters(1).Value = id_cedula
+
+        i = metodos_datos.EjecutarComando(sql_command)
+        Return i
+    End Function
+#End Region
+#End Region
+
+#Region "info_horario"
+
+#Region "Buscar"
+    Public Shared Function buscar_info_horario_carrera(id_horario As String, id_carrera As String) As DataTable
+        Dim tabla As DataTable
+        Dim sql_command As New SqlCommand
+
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "EXEC GetHorarioCarrera @id_horario, @id_carrera"
+        sql_command.Parameters.Add("@id_horario", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@id_carrera", SqlDbType.NVarChar)
+
+        sql_command.Parameters(0).Value = id_horario
+        sql_command.Parameters(1).Value = id_carrera
+
+        tabla = metodos_datos.EjecutarBusqueda(sql_command)
+        Return tabla
+    End Function
+
+    Public Shared Function buscar_info_horario(id_horario As String) As DataTable
+        Dim tabla As DataTable
+        Dim sql_command As New SqlCommand
+
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "EXEC GetHorarioCarrera @id_horario"
+        sql_command.Parameters.Add("@id_horario", SqlDbType.NVarChar)
+
+        sql_command.Parameters(0).Value = id_horario
+
+        tabla = metodos_datos.EjecutarBusqueda(sql_command)
+        Return tabla
+    End Function
+
+    Public Shared Function buscar_info_horario_todo() As DataTable
+        Dim tabla As DataTable
+        Dim sql_command As New SqlCommand
+
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "EXEC GetHorarioCarrera"
+
+        tabla = metodos_datos.EjecutarBusqueda(sql_command)
+        Return tabla
+    End Function
+#End Region
+
+#Region "agregar"
+
+    Public Shared Function agregar_info_horario(id_horario As String, id_carrera As String, dia As String, hora As String, id_sede As String) As Integer
+        Dim i As Integer
+        Dim sql_commmand As New SqlCommand
+
+        sql_commmand = metodos_datos.CrearComando()
+        sql_commmand.CommandText = "INSERT INTO info_horario VALUES(@id_horario, @id_carrera, @dia, @hora, @id_sede)"
+        sql_commmand.Parameters.Add("@id_horario", SqlDbType.NVarChar)
+        sql_commmand.Parameters.Add("@id_carrera", SqlDbType.NVarChar)
+        sql_commmand.Parameters.Add("@dia", SqlDbType.VarChar)
+        sql_commmand.Parameters.Add("@hora", SqlDbType.Int)
+        sql_commmand.Parameters.Add("@id_sede", SqlDbType.NVarChar)
+
+        sql_commmand.Parameters(0).Value = id_horario
+        sql_commmand.Parameters(1).Value = id_carrera
+        sql_commmand.Parameters(2).Value = dia
+        sql_commmand.Parameters(3).Value = hora
+        sql_commmand.Parameters(4).Value = id_sede
+
+        i = metodos_datos.EjecutarComando(sql_commmand)
+        Return i
+    End Function
+#End Region
+
+#Region "modificar"
+    Public Shared Function modificar_info_horario(id_horario As String, id_carrera As String, dia As String, hora As String, id_sede As String) As Integer
+        Dim i As Integer
+        Dim sql_command As New SqlCommand
+
+        sql_command = metodos_datos.CrearComando()
+        sql_command.CommandText = "UPDATE info_horario SET dia = @dia, hora = @hora, id_sede = @id_sede WHERE id_horario = @id_horario AND id_carrera = @id_carrera"
+        sql_command.Parameters.Add("@id_horario", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@id_carrera", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@dia", SqlDbType.VarChar)
+        sql_command.Parameters.Add("@hora", SqlDbType.Int)
+        sql_command.Parameters.Add("@id_sede", SqlDbType.NVarChar)
+
+        sql_command.Parameters(0).Value = id_horario
+        sql_command.Parameters(1).Value = id_carrera
+        sql_command.Parameters(2).Value = dia
+        sql_command.Parameters(3).Value = hora
+        sql_command.Parameters(4).Value = id_sede
+
+        i = metodos_datos.EjecutarComando(sql_command)
+        Return i
+    End Function
+#End Region
+
+#Region "borrar"
+    Public Shared Function borrar_info_horario(id_horario As String, id_carrera As String) As Integer
+        Dim i As Integer
+        Dim sql_command As New SqlCommand
+
+        sql_command = metodos_datos.CrearComando()
+        sql_command.CommandText = "DELETE FROM info_horario WHERE id_horario = @id_horario AND id_carrera = @id_carrera"
+
+        sql_command.Parameters.Add("@id_horario", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@id_carrera", SqlDbType.NVarChar)
+
+        sql_command.Parameters(0).Value = id_horario
+        sql_command.Parameters(1).Value = id_carrera
+
+        i = metodos_datos.EjecutarComando(sql_command)
+        Return i
+    End Function
+#End Region
+
+
+
+
+
+
+
+
+
+
+
+
+#End Region
+
 
 End Class
