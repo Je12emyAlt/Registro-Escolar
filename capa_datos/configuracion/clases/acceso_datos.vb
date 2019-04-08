@@ -649,6 +649,124 @@ Public Class acceso_datos
 
 #End Region
 
+#Region "info_notas"
+
+    Public Shared Function buscar_info_notas_matricula(id_notas As String, id_matricula As String) As DataTable
+        Dim tabla As DataTable
+        Dim sql_command As SqlCommand
+
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "EXEC GetNotasMatricula @id_notas, @id_matricula"
+        sql_command.Parameters.Add("@id_notas", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@id_matricula", SqlDbType.NVarChar)
+
+        sql_command.Parameters(0).Value = id_notas
+        sql_command.Parameters(1).Value = id_matricula
+
+        tabla = metodos_datos.EjecutarBusqueda(sql_command)
+        Return tabla
+    End Function
+    Public Shared Function buscar_info_notas_matricula(id_notas As String) As DataTable
+        Dim tabla As DataTable
+        Dim sql_command As SqlCommand
+
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "EXEC GetNotas @id_notas"
+        sql_command.Parameters.Add("@id_notas", SqlDbType.NVarChar)
+
+        sql_command.Parameters(0).Value = id_notas
+
+        tabla = metodos_datos.EjecutarBusqueda(sql_command)
+        Return tabla
+    End Function
+
+    Public Shared Function buscar_info_notas_todo() As DataTable
+        Dim tabla As DataTable
+        Dim sql_command As SqlCommand
+
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "EXEC GetNotas"
+
+        tabla = metodos_datos.EjecutarBusqueda(sql_command)
+        Return tabla
+    End Function
+
+    Public Shared Function agregar_info_notas(id_nota As String, id_matricula As String, notas As String, nota_final As String, status As String) As Integer
+        Dim i As Integer
+        Dim sql_command As SqlCommand
+
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "INSERT INTO info_notas VALUES (@id_nota, @id_matricula, @notas, @nota_final, @status)"
+
+        sql_command.Parameters.Add("@id_nota", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@id_matricula", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@notas", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@nota_final", SqlDbType.NChar)
+        sql_command.Parameters.Add("@status", SqlDbType.NVarChar)
+
+        sql_command.Parameters(0).Value = id_nota
+        sql_command.Parameters(1).Value = id_matricula
+        sql_command.Parameters(2).Value = notas
+        sql_command.Parameters(3).Value = nota_final
+        sql_command.Parameters(4).Value = status
+
+        i = metodos_datos.EjecutarComando(sql_command)
+        Return i
+    End Function
+
+    Public Shared Function modificar_info_notas(id_nota As String, id_matricula As String, notas As String, nota_final As String, status As String) As Integer
+        Dim i As Integer
+        Dim sql_command As SqlCommand
+
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "UPDATE info_notas SET notas = @notas, nota_final = @nota_final, status = @status WHERE id_nota = @id_nota AND id_matricula = @id_matricula"
+
+        sql_command.Parameters.Add("@id_nota", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@id_matricula", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@notas", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@nota_final", SqlDbType.NChar)
+        sql_command.Parameters.Add("@status", SqlDbType.NVarChar)
+
+        sql_command.Parameters(0).Value = id_nota
+        sql_command.Parameters(1).Value = id_matricula
+        sql_command.Parameters(2).Value = notas
+        sql_command.Parameters(3).Value = nota_final
+        sql_command.Parameters(4).Value = status
+
+        i = metodos_datos.EjecutarComando(sql_command)
+        Return i
+    End Function
+    Public Shared Function borrar_info_notas(id_nota As String, id_matricula As String) As Integer
+        Dim i As Integer
+        Dim sql_command As New SqlCommand
+
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "DELETE FROM info_notas WHERE id_notas = @id_notas AND id_matrucula = @id_matricula"
+        sql_command.Parameters.Add("@id_nota", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@id_matricula", SqlDbType.NVarChar)
+
+        sql_command.Parameters(0).Value = id_nota
+        sql_command.Parameters(1).Value = id_matricula
+
+        i = metodos_datos.EjecutarComando(sql_command)
+        Return i
+    End Function
+
+
+
+
+
+
+
+
+
+
+
+
+
+#End Region
+
+
 #Region "info_sede"
 
 #Region "Buscar"
