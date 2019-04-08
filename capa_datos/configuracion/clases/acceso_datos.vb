@@ -225,7 +225,7 @@ Public Class acceso_datos
         Return tabla
     End Function
 
-    Public Shared Function buscar_info_curso() As DataTable
+    Public Shared Function buscar_info_curso_todo() As DataTable
         Dim tabla As DataTable
         Dim sql_command As SqlCommand
 
@@ -666,7 +666,7 @@ Public Class acceso_datos
         tabla = metodos_datos.EjecutarBusqueda(sql_command)
         Return tabla
     End Function
-    Public Shared Function buscar_info_notas_matricula(id_notas As String) As DataTable
+    Public Shared Function buscar_info_notas(id_notas As String) As DataTable
         Dim tabla As DataTable
         Dim sql_command As SqlCommand
 
@@ -751,21 +751,7 @@ Public Class acceso_datos
         i = metodos_datos.EjecutarComando(sql_command)
         Return i
     End Function
-
-
-
-
-
-
-
-
-
-
-
-
-
 #End Region
-
 
 #Region "info_sede"
 
