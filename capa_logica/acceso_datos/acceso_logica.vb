@@ -21,17 +21,17 @@ Public Class acceso_logica
 
 #Region "agregar"
     Public Shared Function agregar_info_estudiante(id_cedula As String, nombre As String, apellido As String, direccion As String,
-                                                   telefono As String, correo As String, id_carrera As String) As Integer
+                                                   telefono As String, celular As String, correo As String, id_carrera As String) As Integer
         Dim i As Integer
-        i = acceso_datos.agregar_info_estudiante(id_cedula, nombre, apellido, direccion, telefono, correo, id_carrera)
+        i = acceso_datos.agregar_info_estudiante(id_cedula, nombre, apellido, direccion, telefono, celular, correo, id_carrera)
         Return i
     End Function
 #End Region
 #Region "modificar"
     Public Shared Function modificar_info_estudiante(id_cedula As String, nombre As String, apellido As String, direccion As String,
-                                               telefono As String, correo As String, id_carrera As String) As Integer
+                                               telefono As String, celular As String, correo As String, id_carrera As String) As Integer
         Dim i As Integer
-        i = acceso_datos.modificar_info_estudiante(id_cedula, nombre, apellido, direccion, telefono, correo, id_carrera)
+        i = acceso_datos.modificar_info_estudiante(id_cedula, nombre, apellido, direccion, telefono, celular, correo, id_carrera)
         Return i
     End Function
 #End Region

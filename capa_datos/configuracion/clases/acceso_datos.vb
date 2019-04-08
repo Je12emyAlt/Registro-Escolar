@@ -33,18 +33,19 @@ Public Class acceso_datos
 
 #Region "Agregar"
     Public Shared Function agregar_info_estudiante(id_cedula As String, nombre As String, apellido As String, direccion As String,
-                                            telefono As String, correo As String, id_carrera As String) As Integer
+                                            telefono As String, celular As String, correo As String, id_carrera As String) As Integer
         Dim i As Integer
         Dim sql_command As New SqlCommand
         sql_command = metodos_datos.CrearComando
 
-        sql_command.CommandText = "INSERT INTO info_estudiante VALUES(@id_cedula, @nombre, @apellido, @direccion, @telefono, @correo, @id_carrera)"
+        sql_command.CommandText = "INSERT INTO info_estudiante VALUES(@id_cedula, @nombre, @apellido, @direccion, @telefono, @celular, @correo, @id_carrera)"
 
         sql_command.Parameters.Add("@id_cedula", SqlDbType.NVarChar)
         sql_command.Parameters.Add("@nombre", SqlDbType.NVarChar)
         sql_command.Parameters.Add("@apellido", SqlDbType.NVarChar)
         sql_command.Parameters.Add("@direccion", SqlDbType.NVarChar)
         sql_command.Parameters.Add("@telefono", SqlDbType.Int)
+        sql_command.Parameters.Add("@celular", SqlDbType.Int)
         sql_command.Parameters.Add("@correo", SqlDbType.NVarChar)
         sql_command.Parameters.Add("@id_carrera", SqlDbType.NVarChar)
 
@@ -53,8 +54,9 @@ Public Class acceso_datos
         sql_command.Parameters(2).Value = apellido
         sql_command.Parameters(3).Value = direccion
         sql_command.Parameters(4).Value = telefono
-        sql_command.Parameters(5).Value = correo
-        sql_command.Parameters(6).Value = id_carrera
+        sql_command.Parameters(5).Value = celular
+        sql_command.Parameters(6).Value = correo
+        sql_command.Parameters(7).Value = id_carrera
 
         i = metodos_datos.EjecutarComando(sql_command)
         Return i
@@ -63,18 +65,19 @@ Public Class acceso_datos
 
 #Region "Modificar"
     Public Shared Function modificar_info_estudiante(id_cedula As String, nombre As String, apellido As String, direccion As String,
-                                            telefono As String, correo As String, id_carrera As String) As Integer
+                                            telefono As String, celular As String, correo As String, id_carrera As String) As Integer
         Dim i As Integer
         Dim sql_command As New SqlCommand
         sql_command = metodos_datos.CrearComando
 
-        sql_command.CommandText = "UPDATE info_estudiante SET nombre = @nombre, apellido = @apellido, direccion = @direccion, celular = @telefono, correo = @correo, id_carrera = @id_carrera WHERE id_cedula = @id_cedula"
+        sql_command.CommandText = "UPDATE info_estudiante SET nombre = @nombre, apellido = @apellido, direccion = @direccion,telefono = @telefono, celular = @telefono, correo = @correo, id_carrera = @id_carrera WHERE id_cedula = @id_cedula"
 
         sql_command.Parameters.Add("@id_cedula", SqlDbType.NVarChar)
         sql_command.Parameters.Add("@nombre", SqlDbType.NVarChar)
         sql_command.Parameters.Add("@apellido", SqlDbType.NVarChar)
         sql_command.Parameters.Add("@direccion", SqlDbType.NVarChar)
         sql_command.Parameters.Add("@telefono", SqlDbType.Int)
+        sql_command.Parameters.Add("@celular", SqlDbType.Int)
         sql_command.Parameters.Add("@correo", SqlDbType.NVarChar)
         sql_command.Parameters.Add("@id_carrera", SqlDbType.NVarChar)
 
@@ -83,8 +86,9 @@ Public Class acceso_datos
         sql_command.Parameters(2).Value = apellido
         sql_command.Parameters(3).Value = direccion
         sql_command.Parameters(4).Value = telefono
-        sql_command.Parameters(5).Value = correo
-        sql_command.Parameters(6).Value = id_carrera
+        sql_command.Parameters(5).Value = celular
+        sql_command.Parameters(6).Value = correo
+        sql_command.Parameters(7).Value = id_carrera
 
         i = metodos_datos.EjecutarComando(sql_command)
         Return i
@@ -129,7 +133,7 @@ Public Class acceso_datos
         Dim sql_command As New SqlCommand
 
         sql_command = metodos_datos.CrearComando
-        sql_command.CommandText = "SELECT * FROM info_carrera"
+        sql_command.CommandText = "SELECT nombre,descripcion FROM info_carrera "
 
         tabla = metodos_datos.EjecutarBusqueda(sql_command)
 
