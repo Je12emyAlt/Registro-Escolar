@@ -11,7 +11,7 @@ Public Class acceso_datos
 
         sql_command.CommandText = "SELECT * FROM info_estudiante WHERE id_cedula = @id_cedula"                                                         'Ejecucion del SP
 
-        sql_command.Parameters.Add("@id", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@id_cedula", SqlDbType.NVarChar)
         sql_command.Parameters(0).Value = id_cedula
 
         tabla = metodos_datos.EjecutarBusqueda(sql_command)
@@ -128,6 +128,16 @@ Public Class acceso_datos
 #Region "info_carrera"
 #Region "buscar"
 
+    Public Shared Function buscar_id_carrera() As DataTable
+        Dim tabla As DataTable
+        Dim sql_command As New SqlCommand
+
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "SELECT id_carrera FROM info_carrera"
+
+        tabla = metodos_datos.EjecutarBusqueda(sql_command)
+        Return tabla
+    End Function
     Public Shared Function buscar_info_carrera(id_carrera As String) As DataTable
         Dim tabla As DataTable
         Dim sql_command As New SqlCommand

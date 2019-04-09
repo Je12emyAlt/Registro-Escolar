@@ -109,6 +109,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Pantallas\mantenimiento_estudiantes.Designer.vb">
+      <DependentUpon>mantenimiento_estudiantes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\mantenimiento_estudiantes.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -119,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\dashboard.resx">
       <DependentUpon>dashboard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\mantenimiento_estudiantes.resx">
+      <DependentUpon>mantenimiento_estudiantes.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -6,6 +6,12 @@ Public Class acceso_logica
 #Region "info estudiante"
 
 #Region "buscar"
+    Public Shared Function buscar_info_estudiante_plano(id_cedula As String) As DataTable
+        Dim tabla As DataTable
+        tabla = acceso_datos.buscar_info_estudiante_plano(id_cedula)
+        Return tabla
+    End Function
+
     Public Shared Function buscar_info_estudiante(id_cedula As String) As DataTable
         Dim tabla As DataTable
         tabla = acceso_datos.buscar_info_estudiante(id_cedula)
@@ -101,6 +107,20 @@ Public Class acceso_logica
 #Region "Info_cursos"
 
 #Region "buscar"
+    Public Shared Function buscar_id_carrera() As DataTable
+        Dim tabla As DataTable
+        tabla = acceso_datos.buscar_id_carrera()
+        Return tabla
+    End Function
+
+    Public Shared Function buscar_info_curso_carrera_plano(id_curso As String, id_carrera As String) As DataTable
+        Dim tabla As DataTable
+
+        tabla = acceso_datos.buscar_info_curso_carrera_plano(id_carrera, id_carrera)
+
+        Return tabla
+    End Function
+
     Public Shared Function buscar_info_curso_carrera(id_curso As String, id_carrera As String) As DataTable
         Dim tabla As DataTable
 
@@ -160,6 +180,14 @@ Public Class acceso_logica
 #Region "Info_matricula"
 
 #Region "buscar"
+
+    Public Shared Function buscar_info_matricula_estudiante_plano(id_matricula As String, id_cedula As String) As DataTable
+        Dim tabla As DataTable
+
+        tabla = acceso_datos.buscar_info_matricula_estudiante_plano(id_matricula, id_cedula)
+        Return tabla
+    End Function
+
     '*************************************
     Public Shared Function buscar_info_matricula_estudiante(id_matricula As String, id_cedula As String) As DataTable
         Dim tabla As DataTable
@@ -215,6 +243,14 @@ Public Class acceso_logica
 #Region "info_horario"
 
 #Region "Buscar"
+
+    Public Shared Function buscar_info_horario_carrera_plano(id_horario As String, id_carrera As String) As DataTable
+        Dim tabla As DataTable
+
+        tabla = acceso_datos.buscar_info_horario_carrera_plano(id_horario, id_carrera)
+        Return tabla
+    End Function
+
     Public Shared Function buscar_info_horario_carrera(id_horario As String, id_carrera As String) As DataTable
         Dim tabla As DataTable
 
@@ -317,6 +353,13 @@ Public Class acceso_logica
 #End Region
 
 #Region "info_notas"
+#Region "Buscar"
+    Public Shared Function buscar_info_notas_matricula_plano(id_notas As String, id_matricula As String) As DataTable
+        Dim tabla As DataTable
+
+        tabla = acceso_datos.buscar_info_notas_matricula_plano(id_notas, id_matricula)
+        Return tabla
+    End Function
 
     Public Shared Function buscar_info_notas_matricula(id_notas As String, id_matricula As String) As DataTable
         Dim tabla As DataTable
@@ -331,24 +374,19 @@ Public Class acceso_logica
         Return tabla
     End Function
 
-    Public Shared Function buscar_info_notas_todo() As DataTable
-        Dim tabla As DataTable
+#End Region
 
-        tabla = acceso_datos.buscar_info_notas_todo()
-        Return tabla
-    End Function
-
-    Public Shared Function agregar_info_notas(id_nota As String, id_matricula As String, notas As String, nota_final As String, status As String) As Integer
+    Public Shared Function agregar_info_notas(id_nota As String, id_matricula As String, primera_nota As String, segunda_nota As String, tercera_nota As String, nota_final As String, status As String) As Integer
         Dim i As Integer
 
-        i = acceso_datos.agregar_info_notas(id_nota, id_matricula, notas, nota_final, status)
+        i = acceso_datos.agregar_info_notas(id_nota, id_matricula, primera_nota, segunda_nota, tercera_nota, nota_final, status)
         Return i
     End Function
 
-    Public Shared Function modificar_info_notas(id_nota As String, id_matricula As String, notas As String, nota_final As String, status As String) As Integer
+    Public Shared Function modificar_info_notas(id_nota As String, id_matricula As String, primera_nota As String, segunda_nota As String, tercera_nota As String, nota_final As String, status As String) As Integer
         Dim i As Integer
 
-        i = acceso_datos.modificar_info_notas(id_nota, id_matricula, notas, nota_final, status)
+        i = acceso_datos.modificar_info_notas(id_nota, id_matricula, primera_nota, segunda_nota, tercera_nota, nota_final, status)
         Return i
     End Function
     Public Shared Function borrar_info_notas(id_nota As String, id_matricula As String) As Integer
