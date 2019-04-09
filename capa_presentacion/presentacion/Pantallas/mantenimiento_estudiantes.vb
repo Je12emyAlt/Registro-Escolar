@@ -2,23 +2,11 @@
 Imports capa_logica
 Public Class mantenimiento_estudiantes
     Private Sub mantenimiento_estudiantes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'grid_info_estudiantes.DataSource = acceso_logica.buscar_info_estudiante_todo()
-
-        'grid_info_estudiantes.Columns(0).HeaderCell.Value = "Nombre"
-        'grid_info_estudiantes.Columns(1).HeaderCell.Value = "Apellido"
-        'grid_info_estudiantes.Columns(2).HeaderCell.Value = "Direccion"
-        'grid_info_estudiantes.Columns(3).HeaderCell.Value = "Telefono"
-        'grid_info_estudiantes.Columns(4).HeaderCell.Value = "Celular"
-        'grid_info_estudiantes.Columns(5).HeaderCell.Value = "Correo"
-        'grid_info_estudiantes.Columns(6).HeaderCell.Value = "Carrera"
-
-        'txt_id_carrera.DataSource = acceso_logica.buscar_id_carrera
-        'txt_id_carrera.DisplayMember = "id_carrera"
         cargar_datasource()
     End Sub
 
     Private Sub btn_salir_Click(sender As Object, e As EventArgs) Handles btn_salir.Click
-
+        Me.Close()
     End Sub
 
     Private Sub btn_buscar_Click(sender As Object, e As EventArgs) Handles btn_buscar.Click
@@ -123,13 +111,15 @@ Public Class mantenimiento_estudiantes
     Private Sub cargar_datasource()
         grid_info_estudiantes.DataSource = acceso_logica.buscar_info_estudiante_todo()
 
-        grid_info_estudiantes.Columns(0).HeaderCell.Value = "Nombre"
-        grid_info_estudiantes.Columns(1).HeaderCell.Value = "Apellido"
-        grid_info_estudiantes.Columns(2).HeaderCell.Value = "Direccion"
-        grid_info_estudiantes.Columns(3).HeaderCell.Value = "Telefono"
-        grid_info_estudiantes.Columns(4).HeaderCell.Value = "Celular"
-        grid_info_estudiantes.Columns(5).HeaderCell.Value = "Correo"
-        grid_info_estudiantes.Columns(6).HeaderCell.Value = "Carrera"
+        grid_info_estudiantes.Columns(0).HeaderCell.Value = "ID"
+        grid_info_estudiantes.Columns(1).HeaderCell.Value = "Nombre"
+        grid_info_estudiantes.Columns(2).HeaderCell.Value = "Apellido"
+        grid_info_estudiantes.Columns(3).HeaderCell.Value = "Direccion"
+        grid_info_estudiantes.Columns(4).HeaderCell.Value = "Telefono"
+        grid_info_estudiantes.Columns(5).HeaderCell.Value = "Celular"
+        grid_info_estudiantes.Columns(6).HeaderCell.Value = "Correo"
+        grid_info_estudiantes.Columns(7).HeaderCell.Value = "Carrera"
+
 
         txt_id_carrera.DataSource = acceso_logica.buscar_id_carrera
         txt_id_carrera.DisplayMember = "id_carrera"

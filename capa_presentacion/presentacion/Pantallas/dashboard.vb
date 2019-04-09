@@ -47,7 +47,8 @@ Public Class dashboard
     End Sub
 
     Private Sub tile_carreras_Click(sender As Object, e As EventArgs) Handles tile_carreras.Click
-
+        Dim carreras As New mantenimiento_carreras
+        carreras.ShowDialog()
     End Sub
 
     Private Sub tile_profesores_Click(sender As Object, e As EventArgs) Handles tile_profesores.Click

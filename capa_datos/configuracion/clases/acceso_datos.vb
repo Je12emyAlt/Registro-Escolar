@@ -157,7 +157,7 @@ Public Class acceso_datos
         Dim sql_command As New SqlCommand
 
         sql_command = metodos_datos.CrearComando
-        sql_command.CommandText = "SELECT nombre,descripcion FROM info_carrera "
+        sql_command.CommandText = "SELECT * FROM info_carrera "
 
         tabla = metodos_datos.EjecutarBusqueda(sql_command)
 
@@ -190,6 +190,7 @@ Public Class acceso_datos
         Dim i As Integer
         Dim sql_command As New SqlCommand
 
+        sql_command = metodos_datos.CrearComando()
         sql_command.CommandText = "UPDATE info_carrera SET nombre = @nombre, descripcion = @descripcion WHERE id_carrera = @id_carrera"
         sql_command.Parameters.Add("@id_carrera", SqlDbType.NVarChar)
         sql_command.Parameters.Add("@nombre", SqlDbType.NVarChar)
