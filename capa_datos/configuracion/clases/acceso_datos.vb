@@ -4,6 +4,17 @@ Public Class acceso_datos
 #Region "info_estudiantes"
 
 #Region "Buscar informacion"
+    Public Shared Function buscar_id_cedula() As DataTable
+        Dim tabla As DataTable
+        Dim sql_command As New SqlCommand
+        sql_command = metodos_datos.CrearComando
+
+        sql_command.CommandText = "SELECT id_cedula FROM info_estudiante"
+
+        tabla = metodos_datos.EjecutarBusqueda(sql_command)
+        Return tabla
+    End Function
+
     Public Shared Function buscar_info_estudiante_plano(id_cedula As String) As DataTable
         Dim tabla As DataTable
         Dim sql_command As New SqlCommand
@@ -225,6 +236,18 @@ Public Class acceso_datos
 #Region "Info_cursos"
 
 #Region "buscar"
+    Public Shared Function buscar_id_curso() As DataTable
+        Dim tabla As DataTable
+        Dim sql_command As SqlCommand
+
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "SELECT id_curso FROM info_curso"
+
+        tabla = metodos_datos.EjecutarBusqueda(sql_command)
+        Return tabla
+    End Function
+
+
     Public Shared Function buscar_info_curso_plano(id_curso As String) As DataTable
         Dim tabla As DataTable
         Dim sql_command As SqlCommand

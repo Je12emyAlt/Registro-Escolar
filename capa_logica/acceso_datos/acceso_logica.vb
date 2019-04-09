@@ -6,6 +6,12 @@ Public Class acceso_logica
 #Region "info estudiante"
 
 #Region "buscar"
+    Public Shared Function buscar_id_cedula() As DataTable
+        Dim tabla As DataTable
+        tabla = acceso_datos.buscar_id_cedula()
+        Return tabla
+    End Function
+
     Public Shared Function buscar_info_estudiante_plano(id_cedula As String) As DataTable
         Dim tabla As DataTable
         tabla = acceso_datos.buscar_info_estudiante_plano(id_cedula)
@@ -55,6 +61,13 @@ Public Class acceso_logica
 #Region "info_carrera"
 
 #Region "buscar"
+
+    Public Shared Function buscar_id_carrera() As DataTable
+        Dim tabla As DataTable
+        tabla = acceso_datos.buscar_id_carrera()
+        Return tabla
+    End Function
+
     Public Shared Function buscar_info_carrera(id_carrera As String) As DataTable
         Dim tabla As DataTable
 
@@ -107,11 +120,13 @@ Public Class acceso_logica
 #Region "Info_cursos"
 
 #Region "buscar"
-    Public Shared Function buscar_id_carrera() As DataTable
+    Public Shared Function buscar_id_curso() As DataTable
         Dim tabla As DataTable
-        tabla = acceso_datos.buscar_id_carrera()
+        tabla = acceso_datos.buscar_id_curso()
         Return tabla
     End Function
+
+
 
     Public Shared Function buscar_info_curso_plano(id_curso As String) As DataTable
         Dim tabla As DataTable
@@ -216,7 +231,7 @@ Public Class acceso_logica
     Public Shared Function agregar_info_matricula(id_matricula As String, id_cedula As String, id_curso As String, año As String, cuatrimestre As String)
         Dim i As Integer
 
-        i = acceso_datos.agregar_info_matricula(id_matricula, id_cedula, id_cedula, año, cuatrimestre)
+        i = acceso_datos.agregar_info_matricula(id_matricula, id_cedula, id_curso, año, cuatrimestre)
         Return i
     End Function
 #End Region

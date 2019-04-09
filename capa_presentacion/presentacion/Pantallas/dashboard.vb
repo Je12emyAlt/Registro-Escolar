@@ -64,7 +64,8 @@ Public Class dashboard
     End Sub
 
     Private Sub tile_matricula_Click(sender As Object, e As EventArgs) Handles tile_matricula.Click
-
+        Dim matricula As New mantenimiento_matricula
+        matricula.ShowDialog()
     End Sub
 
     Private Sub tile_sede_Click(sender As Object, e As EventArgs) Handles tile_sede.Click
