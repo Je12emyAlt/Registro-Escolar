@@ -37,7 +37,8 @@ Public Class dashboard
     End Sub
 
     Private Sub tile_horarios_Click(sender As Object, e As EventArgs) Handles tile_horarios.Click
-
+        Dim horarios As New mantenimiento_horarios
+        horarios.ShowDialog()
     End Sub
 
     Private Sub tile_estudiantes_Click(sender As Object, e As EventArgs) Handles tile_estudiantes.Click
@@ -51,7 +52,8 @@ Public Class dashboard
     End Sub
 
     Private Sub tile_profesores_Click(sender As Object, e As EventArgs) Handles tile_profesores.Click
-
+        Dim profesores As New mantenimiento_profesores
+        profesores.ShowDialog()
     End Sub
 
     Private Sub tile_cursos_Click(sender As Object, e As EventArgs) Handles tile_cursos.Click

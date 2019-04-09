@@ -532,17 +532,15 @@ Public Class acceso_datos
         Return tabla
     End Function
 
-    Public Shared Function buscar_info_horario_carrera_plano(id_horario As String, id_carrera As String) As DataTable
+    Public Shared Function buscar_info_horario_plano(id_horario As String) As DataTable
         Dim tabla As DataTable
         Dim sql_command As New SqlCommand
 
         sql_command = metodos_datos.CrearComando
-        sql_command.CommandText = "SELECT * FROM info_horario WHERE id_horario = @id_horario AND id_carrera = @id_carrera"
+        sql_command.CommandText = "SELECT * FROM info_horario WHERE id_horario = @id_horario"
         sql_command.Parameters.Add("@id_horario", SqlDbType.NVarChar)
-        sql_command.Parameters.Add("@id_carrera", SqlDbType.NVarChar)
 
         sql_command.Parameters(0).Value = id_horario
-        sql_command.Parameters(1).Value = id_carrera
 
         tabla = metodos_datos.EjecutarBusqueda(sql_command)
         Return tabla
@@ -583,7 +581,7 @@ Public Class acceso_datos
         Dim sql_command As New SqlCommand
 
         sql_command = metodos_datos.CrearComando
-        sql_command.CommandText = "EXEC GetHorarioCarrera"
+        sql_command.CommandText = "EXEC GetHorario_todo"
 
         tabla = metodos_datos.EjecutarBusqueda(sql_command)
         Return tabla
@@ -621,7 +619,7 @@ Public Class acceso_datos
         Dim sql_command As New SqlCommand
 
         sql_command = metodos_datos.CrearComando()
-        sql_command.CommandText = "UPDATE info_horario SET dia = @dia, hora = @hora, id_sede = @id_sede WHERE id_horario = @id_horario AND id_carrera = @id_carrera"
+        sql_command.CommandText = "UPDATE info_horario SET id_carrera = @id_carrera, dia = @dia, hora = @hora, id_sede = @id_sede WHERE id_horario = @id_horario"
         sql_command.Parameters.Add("@id_horario", SqlDbType.NVarChar)
         sql_command.Parameters.Add("@id_carrera", SqlDbType.NVarChar)
         sql_command.Parameters.Add("@dia", SqlDbType.VarChar)
@@ -640,18 +638,16 @@ Public Class acceso_datos
 #End Region
 
 #Region "borrar"
-    Public Shared Function borrar_info_horario(id_horario As String, id_carrera As String) As Integer
+    Public Shared Function borrar_info_horario(id_horario As String) As Integer
         Dim i As Integer
         Dim sql_command As New SqlCommand
 
         sql_command = metodos_datos.CrearComando()
-        sql_command.CommandText = "DELETE FROM info_horario WHERE id_horario = @id_horario AND id_carrera = @id_carrera"
+        sql_command.CommandText = "DELETE FROM info_horario WHERE id_horario = @id_horario"
 
         sql_command.Parameters.Add("@id_horario", SqlDbType.NVarChar)
-        sql_command.Parameters.Add("@id_carrera", SqlDbType.NVarChar)
 
         sql_command.Parameters(0).Value = id_horario
-        sql_command.Parameters(1).Value = id_carrera
 
         i = metodos_datos.EjecutarComando(sql_command)
         Return i
@@ -681,7 +677,7 @@ Public Class acceso_datos
         Dim sql_command As New SqlCommand
 
         sql_command = metodos_datos.CrearComando
-        sql_command.CommandText = "SELECT * FROM info_prefesor WHERE id_profesor = @id_profesor"
+        sql_command.CommandText = "SELECT * FROM info_profesor WHERE id_profesor = @id_profesor"
         sql_command.Parameters.Add("@id_profesor", SqlDbType.NVarChar)
 
         sql_command.Parameters(0).Value = id_profesor
@@ -695,7 +691,7 @@ Public Class acceso_datos
         Dim sql_command As New SqlCommand
 
         sql_command = metodos_datos.CrearComando
-        sql_command.CommandText = "SELECT * FROM info_prefesor"
+        sql_command.CommandText = "SELECT * FROM info_profesor"
 
         tabla = metodos_datos.EjecutarBusqueda(sql_command)
         Return tabla
@@ -714,7 +710,7 @@ Public Class acceso_datos
         sql_command.Parameters.Add("@nombre", SqlDbType.NVarChar)
         sql_command.Parameters.Add("@apellido", SqlDbType.NVarChar)
         sql_command.Parameters.Add("@correo", SqlDbType.NVarChar)
-        sql_command.Parameters.Add("@telefono", SqlDbType.NVarChar)
+        sql_command.Parameters.Add("@telefono", SqlDbType.Int)
 
         sql_command.Parameters(0).Value = id_profesor
         sql_command.Parameters(1).Value = nombre
@@ -760,6 +756,7 @@ Public Class acceso_datos
         sql_command.CommandText = "DELETE FROM info_profesor WHERE id_profesor = @id_profesor"
         sql_command.Parameters.Add("@id_profesor", SqlDbType.NVarChar)
 
+        sql_command.Parameters(0).Value = id_profesor
         i = metodos_datos.EjecutarComando(sql_command)
         Return i
     End Function

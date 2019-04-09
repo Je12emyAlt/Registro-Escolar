@@ -265,10 +265,10 @@ Public Class acceso_logica
         Return tabla
     End Function
 
-    Public Shared Function buscar_info_horario_carrera_plano(id_horario As String, id_carrera As String) As DataTable
+    Public Shared Function buscar_info_horario_plano(id_horario As String) As DataTable
         Dim tabla As DataTable
 
-        tabla = acceso_datos.buscar_info_horario_carrera_plano(id_horario, id_carrera)
+        tabla = acceso_datos.buscar_info_horario_plano(id_horario)
         Return tabla
     End Function
 
@@ -314,10 +314,10 @@ Public Class acceso_logica
 #End Region
 
 #Region "borrar"
-    Public Shared Function borrar_info_horario(id_horario As String, id_carrera As String) As Integer
+    Public Shared Function borrar_info_horario(id_horario As String) As Integer
         Dim i As Integer
 
-        i = acceso_datos.borrar_info_horario(id_horario, id_carrera)
+        i = acceso_datos.borrar_info_horario(id_horario)
         Return i
     End Function
 #End Region
@@ -355,7 +355,7 @@ Public Class acceso_logica
     Public Shared Function agregar_info_profesor(id_profesor As String, nombre As String, apellido As String, correo As String, telefono As String) As Integer
         Dim i As Integer
 
-        i = agregar_info_profesor(id_profesor, nombre, apellido, correo, telefono)
+        i = acceso_datos.agregar_info_profesor(id_profesor, nombre, apellido, correo, telefono)
         Return i
     End Function
 #End Region
