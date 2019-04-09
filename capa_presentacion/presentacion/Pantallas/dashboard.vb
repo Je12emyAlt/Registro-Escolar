@@ -23,11 +23,10 @@ Public Class dashboard
         grid_cursos.Columns(4).HeaderCell.Value = "Descripcion"
         grid_cursos.Columns(5).HeaderCell.Value = "Nombre Profesor"
         grid_cursos.Columns(6).HeaderCell.Value = "Apellido Profesor"
-        grid_cursos.Columns(7).HeaderCell.Value = "Nombre del Curso"
-        grid_cursos.Columns(8).HeaderCell.Value = "Requisito del curso"
-        grid_cursos.Columns(9).HeaderCell.Value = "Sede"
-        grid_cursos.Columns(10).HeaderCell.Value = "Costo"
-        grid_cursos.Columns(11).HeaderCell.Value = "Creditos"
+        grid_cursos.Columns(7).HeaderCell.Value = "Requisito del curso"
+        grid_cursos.Columns(8).HeaderCell.Value = "Sede"
+        grid_cursos.Columns(9).HeaderCell.Value = "Costo"
+        grid_cursos.Columns(10).HeaderCell.Value = "Creditos"
 
 
 
@@ -56,7 +55,8 @@ Public Class dashboard
     End Sub
 
     Private Sub tile_cursos_Click(sender As Object, e As EventArgs) Handles tile_cursos.Click
-
+        Dim cursos As New mantenimiento_cursos
+        cursos.ShowDialog()
     End Sub
 
     Private Sub tile_notas_Click(sender As Object, e As EventArgs) Handles tile_notas.Click

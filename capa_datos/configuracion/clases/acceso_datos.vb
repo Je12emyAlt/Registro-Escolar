@@ -225,16 +225,14 @@ Public Class acceso_datos
 #Region "Info_cursos"
 
 #Region "buscar"
-    Public Shared Function buscar_info_curso_carrera_plano(id_curso As String, id_carrera As String) As DataTable
+    Public Shared Function buscar_info_curso_plano(id_curso As String) As DataTable
         Dim tabla As DataTable
         Dim sql_command As SqlCommand
 
         sql_command = metodos_datos.CrearComando
-        sql_command.CommandText = "SELECT * FROM info_carrera WHERE id_curso = @id_curso AND id_carrera = @id_carrera"
+        sql_command.CommandText = "SELECT * FROM info_curso WHERE id_curso = @id_curso"
         sql_command.Parameters.Add("@id_curso", SqlDbType.NVarChar)
-        sql_command.Parameters.Add("@id_carrera", SqlDbType.NVarChar)
         sql_command.Parameters(0).Value = id_curso
-        sql_command.Parameters(1).Value = id_carrera
 
         tabla = metodos_datos.EjecutarBusqueda(sql_command)
         Return tabla
@@ -322,7 +320,7 @@ Public Class acceso_datos
         Dim sql_command As New SqlCommand
 
         sql_command = metodos_datos.CrearComando
-        sql_command.CommandText = "UPDATE info_curso SET id_horario = @id_horario, nombre = @nombre, id_profesor = @id_profesor, descripcion = @descripcion, requisito = @requisito, id_sede = @id_sede, costo = @costo, creditos = @creditos WHERE id_curso = @id_curso AND id_carrera = @id_carrera"
+        sql_command.CommandText = "UPDATE info_curso SET id_carrera = @id_carrera, id_horario = @id_horario, nombre = @nombre, id_profesor = @id_profesor, descripcion = @descripcion, requisito = @requisito, id_sede = @id_sede, costo = @costo, creditos = @creditos WHERE id_curso = @id_curso"
         sql_command.Parameters.Add("@id_curso", SqlDbType.NVarChar)
         sql_command.Parameters.Add("@id_carrera", SqlDbType.NVarChar)
         sql_command.Parameters.Add("@id_horario", SqlDbType.NVarChar)
@@ -351,16 +349,14 @@ Public Class acceso_datos
 #End Region
 
 #Region "Borrar"
-    Public Shared Function borrar_info_curso(id_curso As String, id_carrera As String) As Integer
+    Public Shared Function borrar_info_curso(id_curso As String) As Integer
         Dim i As Integer
         Dim sql_command As New SqlCommand
 
         sql_command = metodos_datos.CrearComando
-        sql_command.CommandText = "DELETE FROM info_curso WHERE id_curso = @id_curso AND id_carrera = @id_carrera"
+        sql_command.CommandText = "DELETE FROM info_curso WHERE id_curso = @id_curso"
         sql_command.Parameters.Add("@id_curso", SqlDbType.NVarChar)
-        sql_command.Parameters.Add("@id_carrera", SqlDbType.NVarChar)
         sql_command.Parameters(0).Value = id_curso
-        sql_command.Parameters(1).Value = id_carrera
 
         i = metodos_datos.EjecutarComando(sql_command)
         Return i
@@ -502,6 +498,16 @@ Public Class acceso_datos
 #Region "info_horario"
 
 #Region "Buscar"
+    Public Shared Function buscar_id_horario() As DataTable
+        Dim tabla As DataTable
+        Dim sql_command As New SqlCommand
+
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "SELECT id_horario FROM info_horario"
+
+        tabla = metodos_datos.EjecutarBusqueda(sql_command)
+        Return tabla
+    End Function
 
     Public Shared Function buscar_info_horario_carrera_plano(id_horario As String, id_carrera As String) As DataTable
         Dim tabla As DataTable
@@ -634,6 +640,19 @@ Public Class acceso_datos
 #Region "info_profesores"
 
 #Region "Buscar"
+
+    Public Shared Function buscar_id_profesor() As DataTable
+        Dim tabla As DataTable
+        Dim sql_command As New SqlCommand
+
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "SELECT id_profesor FROM info_profesor"
+
+        tabla = metodos_datos.EjecutarBusqueda(sql_command)
+        Return tabla
+    End Function
+
+
     Public Shared Function buscar_info_profesor(id_profesor As String) As DataTable
         Dim tabla As DataTable
         Dim sql_command As New SqlCommand
@@ -857,6 +876,20 @@ Public Class acceso_datos
 #Region "info_sede"
 
 #Region "Buscar"
+
+    Public Shared Function buscar_id_sede() As DataTable
+        Dim tabla As DataTable
+        Dim sql_command As New SqlCommand
+
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "SELECT id_sede FROM info_sede"
+
+        tabla = metodos_datos.EjecutarBusqueda(sql_command)
+        Return tabla
+
+
+    End Function
+
     Public Shared Function buscar_info_sede(id_sede As String) As DataTable
         Dim tabla As DataTable
         Dim sql_command As New SqlCommand
