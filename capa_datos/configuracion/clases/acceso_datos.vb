@@ -94,7 +94,7 @@ Public Class acceso_datos
         Dim sql_command As New SqlCommand
         sql_command = metodos_datos.CrearComando
 
-        sql_command.CommandText = "UPDATE info_estudiante SET nombre = @nombre, apellido = @apellido, direccion = @direccion,telefono = @telefono, celular = @telefono, correo = @correo, id_carrera = @id_carrera WHERE id_cedula = @id_cedula"
+        sql_command.CommandText = "UPDATE info_estudiante SET nombre = @nombre, apellido = @apellido, direccion = @direccion,telefono = @telefono, celular = @celular, correo = @correo, id_carrera = @id_carrera WHERE id_cedula = @id_cedula"
 
         sql_command.Parameters.Add("@id_cedula", SqlDbType.NVarChar)
         sql_command.Parameters.Add("@nombre", SqlDbType.NVarChar)
