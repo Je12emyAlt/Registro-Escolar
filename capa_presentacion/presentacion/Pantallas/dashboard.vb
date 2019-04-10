@@ -1,6 +1,12 @@
 ﻿Imports capa_logica
 Public Class dashboard
     Private Sub dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        txt_id_cedula.DataSource = acceso_logica.buscar_id_cedula
+        txt_id_cedula.DisplayMember = "id_cedula"
+
+        grid_aprobados.DataSource = acceso_logica.buscar_aprobados("")
+        config_grid_aprobados()
+
         grid_info_estudiantes.DataSource = acceso_logica.buscar_info_estudiante_todo()
 
         grid_info_estudiantes.Columns(0).HeaderCell.Value = "Nombre"
@@ -74,5 +80,18 @@ Public Class dashboard
     Private Sub tile_sede_Click(sender As Object, e As EventArgs) Handles tile_sede.Click
         Dim sede As New mantenimiento_sedes
         sede.ShowDialog()
+    End Sub
+
+    Private Sub btn_buscar_Click(sender As Object, e As EventArgs) Handles btn_buscar.Click
+        grid_aprobados.DataSource = acceso_logica.buscar_aprobados(txt_id_cedula.Text)
+        config_grid_aprobados()
+    End Sub
+    Private Sub config_grid_aprobados()
+        grid_aprobados.Columns(0).HeaderCell.Value = "Nombre"
+        grid_aprobados.Columns(1).HeaderCell.Value = "Apellido"
+        grid_aprobados.Columns(2).HeaderCell.Value = "Nombre del Curso"
+        grid_aprobados.Columns(3).HeaderCell.Value = "Año"
+        grid_aprobados.Columns(4).HeaderCell.Value = "Cuatrimestre"
+        grid_aprobados.Columns(5).HeaderCell.Value = "Nota Final"
     End Sub
 End Class

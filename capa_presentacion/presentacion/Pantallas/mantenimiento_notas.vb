@@ -96,7 +96,8 @@ Public Class mantenimiento_notas
         Dim tercera_nota As Integer = 0
 
         promedio = (Convert.ToInt32(txt_primera_nota.Text) + Convert.ToInt32(txt_segunda_nota.Text) + Convert.ToInt32(txt_tercera_nota.Text)) / 3
-        txt_nota_final.Text = promedio.ToString
+
+        txt_nota_final.Text = (Convert.ToInt32(promedio)).ToString
         If promedio >= 70 Then
             txt_status.Text = "Aprobado"
         Else

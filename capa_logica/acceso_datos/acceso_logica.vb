@@ -500,4 +500,10 @@ Public Class acceso_logica
 
 #End Region
 
+    Public Shared Function buscar_aprobados(txt_id_cedula As String) As DataTable
+        Dim Tabla As DataTable
+        Tabla = acceso_datos.buscar_aprobados(txt_id_cedula)
+        Return Tabla
+    End Function
+
 End Class

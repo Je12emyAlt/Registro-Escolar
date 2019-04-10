@@ -1017,6 +1017,19 @@ Public Class acceso_datos
 
 #End Region
 
+    Public Shared Function buscar_aprobados(txt_id_cedula As String) As DataTable
+        Dim tabla As DataTable
+        Dim sql_command As SqlCommand
+
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "EXEC GetAprobados @cedula"
+        sql_command.Parameters.Add("@cedula", SqlDbType.NVarChar)
+
+        sql_command.Parameters(0).Value = txt_id_cedula
+
+        tabla = metodos_datos.EjecutarBusqueda(sql_command)
+        Return tabla
+    End Function
 
 
 End Class
