@@ -392,6 +392,18 @@ Public Class acceso_datos
 
 #Region "buscar"
 
+    Public Shared Function buscar_id_matricula() As DataTable
+        Dim tabla As DataTable
+        Dim sql_command As New SqlCommand
+
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "SELECT id_matricula FROM info_matricula"
+
+        tabla = metodos_datos.EjecutarBusqueda(sql_command)
+        Return tabla
+    End Function
+
+
     Public Shared Function buscar_info_matricula_estudiante_plano(id_matricula As String, id_cedula As String) As DataTable
         Dim tabla As DataTable
         Dim sql_command As New SqlCommand
@@ -766,23 +778,30 @@ Public Class acceso_datos
 #End Region
 
 #Region "info_notas"
-    Public Shared Function buscar_info_notas_matricula_plano(id_notas As String, id_matricula As String) As DataTable
+    Public Shared Function buscar_info_notas_plano(id_notas As String) As DataTable
         Dim tabla As DataTable
         Dim sql_command As SqlCommand
 
         sql_command = metodos_datos.CrearComando
-        sql_command.CommandText = "SELECT * FROM info_notas WHERE id_nota = @id_nota AND id_matricula = @id_matricula"
-        sql_command.Parameters.Add("@id_notas", SqlDbType.NVarChar)
-        sql_command.Parameters.Add("@id_matricula", SqlDbType.NVarChar)
+        sql_command.CommandText = "SELECT * FROM info_notas WHERE id_nota = @id_nota"
+        sql_command.Parameters.Add("@id_nota", SqlDbType.NVarChar)
 
         sql_command.Parameters(0).Value = id_notas
-        sql_command.Parameters(1).Value = id_matricula
 
         tabla = metodos_datos.EjecutarBusqueda(sql_command)
         Return tabla
     End Function
 
+    Public Shared Function buscar_info_notas_estudiante_curso() As DataTable
+        Dim tabla As DataTable
+        Dim sql_command As SqlCommand
 
+        sql_command = metodos_datos.CrearComando
+        sql_command.CommandText = "EXEC GetNotas_Estudiante_Curso_Todos"
+
+        tabla = metodos_datos.EjecutarBusqueda(sql_command)
+        Return tabla
+    End Function
     Public Shared Function buscar_info_notas_matricula(id_notas As String, id_matricula As String) As DataTable
         Dim tabla As DataTable
         Dim sql_command As SqlCommand
@@ -835,7 +854,7 @@ Public Class acceso_datos
         sql_command.Parameters.Add("@primera_nota", SqlDbType.Int)
         sql_command.Parameters.Add("@segunda_nota", SqlDbType.Int)
         sql_command.Parameters.Add("@tercera_nota", SqlDbType.Int)
-        sql_command.Parameters.Add("@nota_final", SqlDbType.NChar)
+        sql_command.Parameters.Add("@nota_final", SqlDbType.Int)
         sql_command.Parameters.Add("@status", SqlDbType.NVarChar)
 
         sql_command.Parameters(0).Value = id_nota
@@ -855,14 +874,14 @@ Public Class acceso_datos
         Dim sql_command As SqlCommand
 
         sql_command = metodos_datos.CrearComando
-        sql_command.CommandText = "UPDATE info_notas SET primera_nota = @primera_nota, segunda_nota = @segunda_nota, tercera_nota = @tercera_nota, nota_final = @nota_final, status = @status WHERE id_nota = @id_nota AND id_matricula = @id_matricula"
+        sql_command.CommandText = "UPDATE info_notas SET id_matricula = @id_matricula ,primera_nota = @primera_nota, segunda_nota = @segunda_nota, tercera_nota = @tercera_nota, nota_final = @nota_final, status = @status WHERE id_nota = @id_nota"
 
         sql_command.Parameters.Add("@id_nota", SqlDbType.NVarChar)
         sql_command.Parameters.Add("@id_matricula", SqlDbType.NVarChar)
         sql_command.Parameters.Add("@primera_nota", SqlDbType.Int)
         sql_command.Parameters.Add("@segunda_nota", SqlDbType.Int)
         sql_command.Parameters.Add("@tercera_nota", SqlDbType.Int)
-        sql_command.Parameters.Add("@nota_final", SqlDbType.NChar)
+        sql_command.Parameters.Add("@nota_final", SqlDbType.Int)
         sql_command.Parameters.Add("@status", SqlDbType.NVarChar)
 
         sql_command.Parameters(0).Value = id_nota
@@ -876,17 +895,15 @@ Public Class acceso_datos
         i = metodos_datos.EjecutarComando(sql_command)
         Return i
     End Function
-    Public Shared Function borrar_info_notas(id_nota As String, id_matricula As String) As Integer
+    Public Shared Function borrar_info_notas(id_nota As String) As Integer
         Dim i As Integer
         Dim sql_command As New SqlCommand
 
         sql_command = metodos_datos.CrearComando
-        sql_command.CommandText = "DELETE FROM info_notas WHERE id_nota = @id_notas AND id_matrucula = @id_matricula"
+        sql_command.CommandText = "DELETE FROM info_notas WHERE id_nota = @id_nota"
         sql_command.Parameters.Add("@id_nota", SqlDbType.NVarChar)
-        sql_command.Parameters.Add("@id_matricula", SqlDbType.NVarChar)
 
         sql_command.Parameters(0).Value = id_nota
-        sql_command.Parameters(1).Value = id_matricula
 
         i = metodos_datos.EjecutarComando(sql_command)
         Return i

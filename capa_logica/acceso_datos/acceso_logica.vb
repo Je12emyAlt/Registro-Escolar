@@ -196,6 +196,14 @@ Public Class acceso_logica
 
 #Region "buscar"
 
+    Public Shared Function buscar_id_matricula() As DataTable
+        Dim tabla As DataTable
+
+        tabla = acceso_datos.buscar_id_matricula
+        Return tabla
+    End Function
+
+
     Public Shared Function buscar_info_matricula_estudiante_plano(id_matricula As String, id_cedula As String) As DataTable
         Dim tabla As DataTable
 
@@ -228,6 +236,7 @@ Public Class acceso_logica
 #End Region
 
 #Region "Agregar"
+
     Public Shared Function agregar_info_matricula(id_matricula As String, id_cedula As String, id_curso As String, año As String, cuatrimestre As String)
         Dim i As Integer
 
@@ -382,11 +391,12 @@ Public Class acceso_logica
 #End Region
 
 #Region "info_notas"
+
 #Region "Buscar"
-    Public Shared Function buscar_info_notas_matricula_plano(id_notas As String, id_matricula As String) As DataTable
+    Public Shared Function buscar_info_notas_plano(id_notas As String) As DataTable
         Dim tabla As DataTable
 
-        tabla = acceso_datos.buscar_info_notas_matricula_plano(id_notas, id_matricula)
+        tabla = acceso_datos.buscar_info_notas_plano(id_notas)
         Return tabla
     End Function
 
@@ -418,10 +428,10 @@ Public Class acceso_logica
         i = acceso_datos.modificar_info_notas(id_nota, id_matricula, primera_nota, segunda_nota, tercera_nota, nota_final, status)
         Return i
     End Function
-    Public Shared Function borrar_info_notas(id_nota As String, id_matricula As String) As Integer
+    Public Shared Function borrar_info_notas(id_nota As String) As Integer
         Dim i As Integer
 
-        i = acceso_datos.borrar_info_notas(id_nota, id_matricula)
+        i = acceso_datos.borrar_info_notas(id_nota)
         Return i
     End Function
 #End Region
@@ -429,6 +439,13 @@ Public Class acceso_logica
 #Region "info_sede"
 
 #Region "Buscar"
+
+    Public Shared Function buscar_info_notas_estudiante() As DataTable
+        Dim tabla As DataTable
+
+        tabla = acceso_datos.buscar_info_notas_estudiante_curso()
+        Return tabla
+    End Function
 
     Public Shared Function buscar_id_sede() As DataTable
         Dim tabla As DataTable

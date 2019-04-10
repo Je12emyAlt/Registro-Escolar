@@ -62,7 +62,8 @@ Public Class dashboard
     End Sub
 
     Private Sub tile_notas_Click(sender As Object, e As EventArgs) Handles tile_notas.Click
-
+        Dim notas As New mantenimiento_notas
+        notas.ShowDialog()
     End Sub
 
     Private Sub tile_matricula_Click(sender As Object, e As EventArgs) Handles tile_matricula.Click
