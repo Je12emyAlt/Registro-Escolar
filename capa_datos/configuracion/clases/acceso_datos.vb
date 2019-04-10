@@ -1007,6 +1007,8 @@ Public Class acceso_datos
         sql_command.CommandText = "DELETE FROM info_sede WHERE id_sede = @id_sede"
         sql_command.Parameters.Add("@id_sede", SqlDbType.NVarChar)
 
+        sql_command.Parameters(0).Value = id_sede
+
         i = metodos_datos.EjecutarComando(sql_command)
         Return i
     End Function

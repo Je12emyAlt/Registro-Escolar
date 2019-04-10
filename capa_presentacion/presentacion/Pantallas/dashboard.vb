@@ -72,6 +72,7 @@ Public Class dashboard
     End Sub
 
     Private Sub tile_sede_Click(sender As Object, e As EventArgs) Handles tile_sede.Click
-
+        Dim sede As New mantenimiento_sedes
+        sede.ShowDialog()
     End Sub
 End Class

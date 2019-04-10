@@ -151,6 +151,12 @@
     <Compile Include="Pantallas\mantenimiento_profesores.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Pantallas\mantenimiento_sedes.Designer.vb">
+      <DependentUpon>mantenimiento_sedes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\mantenimiento_sedes.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -182,6 +188,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\mantenimiento_profesores.resx">
       <DependentUpon>mantenimiento_profesores.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\mantenimiento_sedes.resx">
+      <DependentUpon>mantenimiento_sedes.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -457,7 +457,7 @@ Public Class acceso_logica
     Public Shared Function buscar_info_sede(id_sede As String) As DataTable
         Dim tabla As DataTable
 
-        tabla = buscar_info_sede(id_sede)
+        tabla = acceso_datos.buscar_info_sede(id_sede)
         Return tabla
     End Function
 
